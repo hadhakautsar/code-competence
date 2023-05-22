@@ -1,6 +1,7 @@
 package config
 
 import (
+	"code-competence-remidi/models"
 	"fmt"
 
 	"gorm.io/driver/mysql"
@@ -12,6 +13,11 @@ func InitDB() (*gorm.DB, error) {
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		return nil, fmt.Errorf("failed to connect to database: %w", err)
+	}
+
+	err = db.AutoMigrate(&models.Barang{})
+	if err != nil {
+		return nil, fmt.Errorf("failed to automigrate models: %w", err)
 	}
 
 	return db, nil

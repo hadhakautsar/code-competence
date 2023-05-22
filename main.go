@@ -2,6 +2,7 @@ package main
 
 import (
 	config "code-competence-remidi/configs"
+	"code-competence-remidi/middleware"
 	"code-competence-remidi/routes"
 	"os"
 
@@ -17,6 +18,8 @@ func main() {
 	if err != nil {
 		e.Logger.Fatal(err)
 	}
+
+	e.Use(middleware.LogMiddleware)
 
 	// Register routes
 	routes.InitRoutes(e, db)
