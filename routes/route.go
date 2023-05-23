@@ -10,7 +10,7 @@ import (
 func InitRoutes(e *echo.Echo, db *gorm.DB) {
 	BarangController := controllers.NewBarangController(db)
 
-	// Admin routes
+	// Barang routes
 	e.POST("/items", BarangController.Create)
 	e.GET("/items", BarangController.ReadAll)
 	e.GET("/items/:id", BarangController.Read)
